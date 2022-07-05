@@ -4,6 +4,8 @@ This repository is a simple example of how to use CMake's toolchain functionalit
 
 For a more complex example that is still easy to understand check out [SerenityOS](https://github.com/SerenityOS/serenity/tree/master/Toolchain).
 
+Note: Using the Visual Studio generator will not work since it [silently ignores the toolchain file settings for CMAKE_C_COMPILER and CMAKE_CXX_COMPILER](https://gitlab.kitware.com/cmake/cmake/-/issues/23385). I recommend using the Ninja generator.
+
 ## Getting Started
 
 ### Checkout
@@ -15,17 +17,9 @@ cd cmake-toolchain-example
 
 ### Build
 
-```sh
-# First, we build the toolchain
-# You only need to do this the first time and when the toolchain changes
-mkdir toolchain/build
-cd toolchain/build
-cmake .. -GNinja
-cmake --build . --target install
-cd ../..
+You need to re-configure the build from scratch when the toolchain file changes.
 
-# Finally, we build the project
-# You will need to re-generate the project when the toolchain changes
+```sh
 mkdir build
 cd build
 cmake .. -GNinja
